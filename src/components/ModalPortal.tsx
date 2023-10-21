@@ -7,10 +7,8 @@ interface IPortal{
 
 function ModalPortal({children}: IPortal){
     const el = document.createElement('div')
-    const className = 'modalContainer'
 
     useEffect( () => {
-        el.classList.add(className)
         document.body.appendChild(el)
 
         return () => {
