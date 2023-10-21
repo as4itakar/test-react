@@ -1,13 +1,20 @@
+import Card from './components/Card';
+import Input from './components/Input';
 import styles from './styles/App.module.scss'
 
 function App() {
   return (
     <main className={styles.wrapper}>
-      <section className="inputContainer">
-        
+      <section className={styles.inputContainer}>
+        <Input/>
       </section>
-      <section className="cardsContainer">
-
+      <section className={styles.cardsContainer}>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
       </section>
     </main>
   );
