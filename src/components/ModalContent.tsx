@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import styles from '../styles/Modal.module.scss'
 import {IoClose} from 'react-icons/io5'
 

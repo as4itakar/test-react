@@ -8,6 +8,11 @@ export class ApiRequests{
         return response.data
     }
 
+    static async getUser(name: string): Promise<IUser>{
+        const respone = await axios.get<IUser>('http://[::1]:3000' + name)
+        return respone.data
+    }
+
 
 
 }

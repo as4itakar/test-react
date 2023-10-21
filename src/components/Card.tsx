@@ -7,12 +7,12 @@ interface ICard{
     fullName: string;
     phoneNumber: string,
     mail: string,
-    openModal: () => void
+    openModal: (name: string) => void
 }
 
 function Card({fullName, phoneNumber, mail, openModal}: ICard){
     return (
-        <article onClick={openModal} className={styles.card}>
+        <article onClick={ () => openModal(fullName)} className={styles.card}>
             <h1 className={styles.cardTitle}>{fullName}</h1>
             <ul className={styles.cardList}>
                 <Line text={phoneNumber}><TiDevicePhone className={styles.icon}/></Line>

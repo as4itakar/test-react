@@ -32,9 +32,8 @@ function App() {
     setUsers(regularUsers.current)
   }
 
-  const openModal = () => {
+  const openModal = (name: string) => {
     setVisible(true)
-    console.log(visible)
   }
 
   useEffect( () => {
