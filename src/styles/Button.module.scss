@@ -1,0 +1,14 @@
+.button{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    border-radius: 50px;
+    border: none;
+    background-color: transparent;
+    font-size: 24px;
+    color: purple;
+    cursor: pointer;
+}

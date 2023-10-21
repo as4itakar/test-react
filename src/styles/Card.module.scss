@@ -1,7 +1,24 @@
 .card{
-    flex: 1 200px;
+    width: 357px;
+    height: 314px;
     border-radius: 10px;
     -webkit-box-shadow: 1px 0px 8px 3px rgba(34, 60, 80, 0.2);
     -moz-box-shadow: 1px 0px 8px 3px rgba(34, 60, 80, 0.2);
     box-shadow: 1px 0px 8px 3px rgba(34, 60, 80, 0.2);
+}
+
+.cardTitle{
+    margin: 20px
+}
+
+.cardList{
+    list-style-type: none;
+    margin: 20px;
+    padding: 0;
+}
+
+.icon{
+    vertical-align: middle;
+    color: purple;
+    font-size: 20px
 }
