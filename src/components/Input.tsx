@@ -1,8 +1,14 @@
+import { Dispatch, SetStateAction, SyntheticEvent } from 'react'
 import styles from '../styles/Input.module.scss'
 
-function Input(){
+interface IInput{
+    searchValue: string,
+    setValue: Dispatch<SetStateAction<string>>
+}
+
+function Input({searchValue, setValue}: IInput){
     return(
-        <input className={styles.inputField} type="text" />
+        <input value={searchValue} onChange={(e) => setValue(e.target.value)} className={styles.inputField} type="text" />
     )
 }
 

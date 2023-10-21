@@ -3,13 +3,19 @@ import {TiDevicePhone} from 'react-icons/ti'
 import {VscMail} from 'react-icons/vsc'
 import Line from './Line'
 
-function Card(){
+interface ICard{
+    fullName: string;
+    phoneNumber: string,
+    mail: string
+}
+
+function Card({fullName, phoneNumber, mail}: ICard){
     return (
         <article className={styles.card}>
-            <h1 className={styles.cardTitle}>Евгений Савченко</h1>
+            <h1 className={styles.cardTitle}>{fullName}</h1>
             <ul className={styles.cardList}>
-                <Line text='8756805985'><TiDevicePhone className={styles.icon}/></Line>
-                <Line text='ahsgdjashgd@gmail.com'><VscMail className={styles.icon}/></Line>
+                <Line text={phoneNumber}><TiDevicePhone className={styles.icon}/></Line>
+                <Line text={mail}><VscMail className={styles.icon}/></Line>
             </ul>
         </article>
     )
