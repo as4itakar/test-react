@@ -43,7 +43,13 @@ function App() {
       </section>
       <section className={styles.cardsContainer}>
         {
-          users.map( user => <Card key={user.email} fullName={user.name} phoneNumber={user.phone} mail={user.email}/>)
+          errorUsers && <h1>Что-то пошло не так... ({errorUsers})</h1>
+        }
+        {
+          loadUsers ?
+            <h1>Загрузка...</h1>
+                    :
+            users.map( user => <Card key={user.email} fullName={user.name} phoneNumber={user.phone} mail={user.email}/>)
         }
       </section>
       <ModalPortal><ModalContent/></ModalPortal>
