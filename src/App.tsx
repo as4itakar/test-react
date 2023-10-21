@@ -15,6 +15,7 @@ function App() {
   const [users, setUsers] = useState<IUser[]>([])
   const regularUsers = useRef<IUser[]>([])
   const [searchValue, setSearchValue] = useState<string>('')
+  const [visible, setVisible] = useState<boolean>(false)
 
   const [fetchingUsers, loadUsers, errorUsers] = useFetching( async () => {
     const users: IUser[] = await ApiRequests.getUsers()
@@ -29,6 +30,11 @@ function App() {
       return
     }
     setUsers(regularUsers.current)
+  }
+
+  const openModal = () => {
+    setVisible(true)
+    console.log(visible)
   }
 
   useEffect( () => {
@@ -49,10 +55,10 @@ function App() {
           loadUsers ?
             <h1>Загрузка...</h1>
                     :
-            users.map( user => <Card key={user.email} fullName={user.name} phoneNumber={user.phone} mail={user.email}/>)
+            users.map( user => <Card key={user.email} fullName={user.name} phoneNumber={user.phone} mail={user.email} openModal={openModal}/>)
         }
       </section>
-      <ModalPortal><ModalContent/></ModalPortal>
+      <ModalPortal><ModalContent visible={visible} setVisible={setVisible}/></ModalPortal>
     </main>
   );
 }

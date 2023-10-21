@@ -6,15 +6,9 @@ interface IPortal{
 }
 
 function ModalPortal({children}: IPortal){
-    const el = document.createElement('div')
 
-    useEffect( () => {
-        document.body.appendChild(el)
+    const el = document.querySelector('#portal')!
 
-        return () => {
-            document.body.removeChild(el)
-        }
-    }, [])
     return ReactDOM.createPortal(children, el)
 }
 

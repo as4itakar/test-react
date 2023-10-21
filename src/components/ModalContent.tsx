@@ -1,21 +1,26 @@
-import { useMemo, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import styles from '../styles/Modal.module.scss'
 import {IoClose} from 'react-icons/io5'
 
-function ModalContent(){
+interface IModalContent{
+    visible: boolean,
+    setVisible: Dispatch<SetStateAction<boolean>>
+}
 
-    const [visible, setVisible] = useState<boolean>(false)
+function ModalContent({visible, setVisible}: IModalContent){
 
-    const modalStyles = useMemo( () => {
-        return visible ? styles.modalWrapper : [styles.modalWrapper, styles.invisible].join(' ')
-    }, [visible])
+    const modalStyles = visible ? styles.modalWrapper : [styles.modalWrapper, styles.invisible].join(' ')
+
+    const closeModal = () => {
+        setVisible(false)
+    }
 
     return (
-        <div className={modalStyles}>
+        <div onClick={closeModal} className={modalStyles}>
             <section className={styles.modalContainer}>
                 <article className={styles.titleContainer}>
                     <h1 className={styles.modalTitle}>Евгений Савченко</h1>
-                    <button className={styles.closeBtn} type='button'><IoClose/></button>
+                    <button onClick={closeModal} className={styles.closeBtn} type='button'><IoClose/></button>
                 </article>
                 <article className={styles.listContainer}>
                     <ul className={[styles.modalList, styles.left].join(' ')}>

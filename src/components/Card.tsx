@@ -6,12 +6,13 @@ import Line from './Line'
 interface ICard{
     fullName: string;
     phoneNumber: string,
-    mail: string
+    mail: string,
+    openModal: () => void
 }
 
-function Card({fullName, phoneNumber, mail}: ICard){
+function Card({fullName, phoneNumber, mail, openModal}: ICard){
     return (
-        <article className={styles.card}>
+        <article onClick={openModal} className={styles.card}>
             <h1 className={styles.cardTitle}>{fullName}</h1>
             <ul className={styles.cardList}>
                 <Line text={phoneNumber}><TiDevicePhone className={styles.icon}/></Line>
