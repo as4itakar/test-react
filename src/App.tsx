@@ -1,22 +1,22 @@
-import Button from './components/Button';
 import Card from './components/Card';
-import Input from './components/Input';
 import ModalContent from './components/ModalContent';
 import ModalPortal from './components/ModalPortal';
 import styles from './styles/App.module.scss'
 import {BiSearch} from 'react-icons/bi'
-import { SyntheticEvent, useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState } from 'react';
 import useFetching from './hooks/useFetching';
 import { ApiRequests } from './api/ApiRequests';
 import IUser from './models/IUser';
+import InputArea from './components/InputArea';
+import Cards from './components/Cards';
 
 function App() {
 
   const [users, setUsers] = useState<IUser[]>([])
-  const regularUsers = useRef<IUser[]>([])
-  const userName = useRef<string>('')
   const [searchValue, setSearchValue] = useState<string>('')
   const [visible, setVisible] = useState<boolean>(false)
+  const regularUsers = useRef<IUser[]>([])
+  const userName = useRef<string>('')
 
   const [fetchingUsers, loadUsers, errorUsers] = useFetching( async () => {
     const users: IUser[] = await ApiRequests.getUsers()
@@ -44,21 +44,8 @@ function App() {
 
   return (
     <main className={styles.wrapper}>
-      <section className={styles.inputContainer}>
-        <Input searchValue={searchValue} setValue={setSearchValue}/>
-        <Button callFunc={search}><BiSearch/></Button>
-      </section>
-      <section className={styles.cardsContainer}>
-        {
-          errorUsers && <h1>Что-то пошло не так... ({errorUsers})</h1>
-        }
-        {
-          loadUsers ?
-            <h1>Загрузка...</h1>
-                    :
-            users.map( user => <Card key={user.email} fullName={user.name} phoneNumber={user.phone} mail={user.email} openModal={openModal}/>)
-        }
-      </section>
+      <InputArea searchFunc={search} searchValue={searchValue} setSearchValue={setSearchValue}/>
+      <Cards errorUsers={errorUsers} loadUsers={loadUsers} users={users} openModal={openModal}/>
       <ModalPortal><ModalContent visible={visible} setVisible={setVisible} userName={userName.current}/></ModalPortal>
     </main>
   );

@@ -17,7 +17,7 @@ function ModalContent({visible, setVisible, userName}: IModalContent){
 
     const modalStyles = visible ? styles.modalWrapper : [styles.modalWrapper, styles.invisible].join(' ')
 
-    const [fetchingUser, loadUSer, errorUser] = useFetching(async () => {
+    const [fetchingUser, loadUser, errorUser] = useFetching(async () => {
         const user = await ApiRequests.getUser(userName)
         setUser(user[0])
     })
@@ -35,30 +35,37 @@ function ModalContent({visible, setVisible, userName}: IModalContent){
     return (
         <div onClick={closeModal} className={modalStyles}>
             <section onClick={(e: SyntheticEvent) => e.stopPropagation()} className={styles.modalContainer}>
-                <article className={styles.titleContainer}>
-                    <h1 className={styles.modalTitle}>{user?.name}</h1>
-                    <button onClick={closeModal} className={styles.closeBtn} type='button'><IoClose/></button>
-                </article>
-                <article className={styles.listContainer}>
-                    <ul className={[styles.modalList, styles.left].join(' ')}>
-                        <li>Телефон:</li>
-                        <li>Почта:</li>
-                        <li>Дата приема:</li>
-                        <li>Должность:</li>
-                        <li>Подразделение:</li>
-                    </ul>
-                    <ul className={[styles.modalList, styles.right].join(' ')}>
-                        <li title={user?.phone} className={styles.cutRow}>{user?.phone}</li>
-                        <li title={user?.email} className={styles.cutRow}>{user?.email}</li>
-                        <li title={user?.hire_date} className={styles.cutRow}>{user?.hire_date}</li>
-                        <li title={user?.position_name} className={styles.cutRow}>{user?.position_name}</li>
-                        <li title={user?.department} className={styles.cutRow}>{user?.department}</li>
-                    </ul>
-                </article>
-                <article className="infoContainer">
-                    <h1 className={styles.infoTitle}>Дополнительная информация:</h1>
-                    <p className={styles.modalParagraph}>{user?.address}</p>
-                </article>
+                {
+                    loadUser ?
+                        <h1 className={styles.globalTitle}>Загрузка...</h1>
+                             :
+                        <>
+                            <article className={styles.titleContainer}>
+                                <h1 className={styles.modalTitle}>{errorUser? 'Что-то пошло не так...' : user?.name}</h1>
+                                <button onClick={closeModal} className={styles.closeBtn} type='button'><IoClose/></button>
+                            </article>
+                            <article className={styles.listContainer}>
+                                <ul className={[styles.modalList, styles.left].join(' ')}>
+                                    <li>Телефон:</li>
+                                    <li>Почта:</li>
+                                    <li>Дата приема:</li>
+                                    <li>Должность:</li>
+                                    <li>Подразделение:</li>
+                                </ul>
+                                <ul className={[styles.modalList, styles.right].join(' ')}>
+                                    <li title={user?.phone} className={styles.cutRow}>{user?.phone}</li>
+                                    <li title={user?.email} className={styles.cutRow}>{user?.email}</li>
+                                    <li title={user?.hire_date} className={styles.cutRow}>{user?.hire_date}</li>
+                                    <li title={user?.position_name} className={styles.cutRow}>{user?.position_name}</li>
+                                    <li title={user?.department} className={styles.cutRow}>{user?.department}</li>
+                                </ul>
+                            </article>
+                            <article className="infoContainer">
+                                <h1 className={styles.infoTitle}>Дополнительная информация:</h1>
+                                <p className={styles.modalParagraph}>{user?.address}</p>
+                            </article>
+                        </>
+                }
             </section>
         </div>
     )
