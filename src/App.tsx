@@ -5,7 +5,7 @@ import ModalContent from './components/ModalContent';
 import ModalPortal from './components/ModalPortal';
 import styles from './styles/App.module.scss'
 import {BiSearch} from 'react-icons/bi'
-import { useEffect, useRef, useState } from 'react';
+import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import useFetching from './hooks/useFetching';
 import { ApiRequests } from './api/ApiRequests';
 import IUser from './models/IUser';
@@ -14,6 +14,7 @@ function App() {
 
   const [users, setUsers] = useState<IUser[]>([])
   const regularUsers = useRef<IUser[]>([])
+  const userName = useRef<string>('')
   const [searchValue, setSearchValue] = useState<string>('')
   const [visible, setVisible] = useState<boolean>(false)
 
@@ -34,6 +35,7 @@ function App() {
 
   const openModal = (name: string) => {
     setVisible(true)
+    userName.current = name
   }
 
   useEffect( () => {
@@ -44,7 +46,7 @@ function App() {
     <main className={styles.wrapper}>
       <section className={styles.inputContainer}>
         <Input searchValue={searchValue} setValue={setSearchValue}/>
-        <Button searchUser={search}><BiSearch/></Button>
+        <Button callFunc={search}><BiSearch/></Button>
       </section>
       <section className={styles.cardsContainer}>
         {
@@ -57,7 +59,7 @@ function App() {
             users.map( user => <Card key={user.email} fullName={user.name} phoneNumber={user.phone} mail={user.email} openModal={openModal}/>)
         }
       </section>
-      <ModalPortal><ModalContent visible={visible} setVisible={setVisible}/></ModalPortal>
+      <ModalPortal><ModalContent visible={visible} setVisible={setVisible} userName={userName.current}/></ModalPortal>
     </main>
   );
 }

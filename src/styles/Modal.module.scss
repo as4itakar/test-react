@@ -25,6 +25,7 @@
 
 .modalTitle{
     margin: 0;
+    font-size: 24px;
 }
 
 .listContainer{
@@ -33,11 +34,13 @@
     margin: 48px 0;
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
 .modalList{
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .left{
@@ -46,10 +49,19 @@
 
 .right{
     width: 275px;
-    color: lightgray;
+    color: #8189A3;
 }
-li:not(:nth-last-child(1)){
+.left li:not(:nth-last-child(1)){
     margin-bottom: 14px;
+}
+
+.right li:not(:nth-last-child(1)){
+    margin-bottom: 14px;
+}
+
+li{
+    height: 24px;
+    font-size: 18px;
 }
 
 .infoContainer{
@@ -58,13 +70,21 @@ li:not(:nth-last-child(1)){
 }
 
 .modalParagraph{
-    color: lightgray;
+    color: #8189A3;
     margin-bottom: 0;
+    font-size: 16px;
+}
+
+.cutRow{
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .infoTitle{
     margin: 0;
     font-weight: normal;
+    font-size: 18px;
 }
 
 .titleContainer{

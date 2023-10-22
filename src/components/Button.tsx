@@ -3,12 +3,12 @@ import styles from '../styles/Button.module.scss'
 
 interface IButton{
     children: React.ReactNode,
-    searchUser: () => void
+    callFunc: () => void
 }
 
-function Button({children, searchUser}: IButton){
+function Button({children, callFunc}: IButton){
     return (
-        <button onClick={searchUser} type='button' className={styles.button}>{children}</button>
+        <button onClick={callFunc} type='button' className={styles.button}>{children}</button>
     )
 }
 
