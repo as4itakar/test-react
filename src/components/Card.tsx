@@ -2,13 +2,7 @@ import styles from '../styles/Card.module.scss'
 import {TiDevicePhone} from 'react-icons/ti'
 import {VscMail} from 'react-icons/vsc'
 import Line from './Line'
-
-interface ICard{
-    fullName: string;
-    phoneNumber: string,
-    mail: string,
-    openModal: (name: string) => void
-}
+import ICard from '../models/component/ICard'
 
 function Card({fullName, phoneNumber, mail, openModal}: ICard){
     return (

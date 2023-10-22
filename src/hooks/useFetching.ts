@@ -1,6 +1,4 @@
 import { useState } from "react";
-import IUser from "../models/IUser";
-import { AxiosError } from "axios";
 
 function useFetching(callback: () => Promise<any>){
     const [load, setLoad] = useState<boolean>(false)

@@ -2,11 +2,10 @@ import Card from './components/Card';
 import ModalContent from './components/ModalContent';
 import ModalPortal from './components/ModalPortal';
 import styles from './styles/App.module.scss'
-import {BiSearch} from 'react-icons/bi'
-import {useEffect, useRef, useState } from 'react';
+import {useCallback, useEffect, useRef, useState } from 'react';
 import useFetching from './hooks/useFetching';
 import { ApiRequests } from './api/ApiRequests';
-import IUser from './models/IUser';
+import IUser from './models/entity/IUser';
 import InputArea from './components/InputArea';
 import Cards from './components/Cards';
 
@@ -18,20 +17,20 @@ function App() {
   const regularUsers = useRef<IUser[]>([])
   const userName = useRef<string>('')
 
-  const [fetchingUsers, loadUsers, errorUsers] = useFetching( async () => {
+  const [fetchingUsers, loadUsers, errorUsers] = useFetching( useCallback( async () => {
     const users: IUser[] = await ApiRequests.getUsers()
     setUsers(users)
     regularUsers.current = users
-  })
+  },[]))
 
-  const search = () => {
+  const search = useCallback(() => {
     if (searchValue.trim() !== ''){
       const necUsers = regularUsers.current.filter( user => user.name.toLowerCase().includes(searchValue.toLowerCase()))
       setUsers(necUsers)
       return
     }
     setUsers(regularUsers.current)
-  }
+  }, [searchValue])
 
   const openModal = (name: string) => {
     setVisible(true)

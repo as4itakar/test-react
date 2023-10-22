@@ -1,7 +1,9 @@
+@import '../global.scss';
+
 .inputField{
     min-width: calc(100% - 20px);
     height: 100%;
-    border: 1px solid#D4DEFE;
+    border: 1px solid $blueberry;
     border-radius: 25px;
     padding: 0 10px;
     font-size: 16px;

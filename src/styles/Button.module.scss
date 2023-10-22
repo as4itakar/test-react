@@ -1,3 +1,5 @@
+@import '../global.scss';
+
 .button{
     width: 24px;
     height: 24px;
@@ -9,6 +11,6 @@
     border: none;
     background-color: transparent;
     font-size: 24px;
-    color: #432EAB;
+    color: $purple;
     cursor: pointer;
 }

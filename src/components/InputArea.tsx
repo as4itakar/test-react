@@ -2,13 +2,7 @@ import { BiSearch } from "react-icons/bi"
 import Button from "./Button"
 import Input from "./Input"
 import styles from '../styles/InputArea.module.scss'
-import { Dispatch, SetStateAction } from "react"
-
-interface IInputArea{
-    searchFunc: () => void
-    searchValue: string,
-    setSearchValue: Dispatch<SetStateAction<string>>
-}
+import IInputArea from "../models/component/IInputArea"
 
 function InputArea({searchFunc, searchValue, setSearchValue}: IInputArea){
 

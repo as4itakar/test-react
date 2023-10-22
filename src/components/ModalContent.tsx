@@ -1,23 +1,21 @@
-import { Dispatch, SetStateAction, SyntheticEvent, useEffect, useState } from 'react'
+import { SyntheticEvent, useEffect, useMemo, useState } from 'react'
 import styles from '../styles/Modal.module.scss'
 import {IoClose} from 'react-icons/io5'
 import useFetching from '../hooks/useFetching'
-import IUser from '../models/IUser'
+import IUser from '../models/entity/IUser'
 import { ApiRequests } from '../api/ApiRequests'
+import React from 'react'
+import IModalContent from '../models/component/IModalContent'
 
-interface IModalContent{
-    visible: boolean,
-    setVisible: Dispatch<SetStateAction<boolean>>,
-    userName: string
-}
-
-function ModalContent({visible, setVisible, userName}: IModalContent){
+export default React.memo(function ModalContent({visible, setVisible, userName}: IModalContent){
 
     const [user, setUser] = useState<IUser>({} as IUser)
 
-    const modalStyles = visible ? styles.modalWrapper : [styles.modalWrapper, styles.invisible].join(' ')
+    const modalStyles = useMemo( () => {
+        return visible ? styles.modalWrapper : [styles.modalWrapper, styles.invisible].join(' ')
+    }, [visible])
 
-    const [fetchingUser, loadUser, errorUser] = useFetching(async () => {
+    const [fetchingUser, loadUser, errorUser] = useFetching( async () => {
         const user = await ApiRequests.getUser(userName)
         setUser(user[0])
     })
@@ -37,9 +35,11 @@ function ModalContent({visible, setVisible, userName}: IModalContent){
             <section onClick={(e: SyntheticEvent) => e.stopPropagation()} className={styles.modalContainer}>
                 {
                     loadUser ?
-                        <h1 className={styles.globalTitle}>Загрузка...</h1>
+                        <div>
+                            <h1 key='modal-load' className={styles.globalTitle}>Загрузка...</h1>
+                        </div>
                              :
-                        <>
+                        <div>
                             <article className={styles.titleContainer}>
                                 <h1 className={styles.modalTitle}>{errorUser? 'Что-то пошло не так...' : user?.name}</h1>
                                 <button onClick={closeModal} className={styles.closeBtn} type='button'><IoClose/></button>
@@ -64,12 +64,9 @@ function ModalContent({visible, setVisible, userName}: IModalContent){
                                 <h1 className={styles.infoTitle}>Дополнительная информация:</h1>
                                 <p className={styles.modalParagraph}>{user?.address}</p>
                             </article>
-                        </>
+                        </div>
                 }
             </section>
         </div>
     )
-}
-
-export default ModalContent
-
+})

@@ -1,10 +1,6 @@
-import { Dispatch, SetStateAction, SyntheticEvent } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import styles from '../styles/Input.module.scss'
-
-interface IInput{
-    searchValue: string,
-    setValue: Dispatch<SetStateAction<string>>
-}
+import IInput from '../models/component/IInput'
 
 function Input({searchValue, setValue}: IInput){
     return(

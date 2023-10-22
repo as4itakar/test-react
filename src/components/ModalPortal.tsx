@@ -1,9 +1,5 @@
-import React, { useEffect } from "react"
 import ReactDOM from "react-dom"
-
-interface IPortal{
-    children: React.ReactNode
-}
+import IPortal from "../models/component/IPortal"
 
 function ModalPortal({children}: IPortal){
 

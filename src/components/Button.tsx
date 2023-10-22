@@ -1,10 +1,5 @@
-import React, { Dispatch, SetStateAction } from "react"
 import styles from '../styles/Button.module.scss'
-
-interface IButton{
-    children: React.ReactNode,
-    callFunc: () => void
-}
+import IButton from "../models/component/IButton"
 
 function Button({children, callFunc}: IButton){
     return (
